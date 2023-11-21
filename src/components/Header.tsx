@@ -6,6 +6,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
+import { Iuser } from "@/types/tasksType";
 
 export const Header = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ export const Header = () => {
   };
 
   useEffect(() => {
+
     getUser();
   }
   , []);
@@ -96,7 +98,7 @@ export const Header = () => {
         <>
         <button onClick={logout} className="btn btn-ghost">Logout</button>
         <div  className="   flex gap-1 navbar-end">
-        {loggined? <p>Hello {user?.username}</p>:""}
+        {loggined? <p>Hello { user && (user as Iuser).username }</p>:""}
         <div className="avatar">
           <div className="w-10 mask mask-hexagon">
             <img src="https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg" />

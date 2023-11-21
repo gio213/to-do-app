@@ -9,8 +9,9 @@ import { MdDeleteForever } from "react-icons/md";
 import { Modal } from "@/components/Modal";
 
 
+
 const page = () => {
-  const [tasks, setTasks] = useState<Itask>();
+  const [tasks, setTasks] = useState<Itask>( );
   const [task, setTask] = useState<Itask>();
   const [loading, setLoading] = useState<boolean>(false);
   const [text , setText] = useState<string>("");
@@ -145,7 +146,8 @@ const page = () => {
           </tr>
         </thead>
         <tbody >
-          {tasks?.map((task) => (
+          { tasks && tasks.map((task:any) =>
+           (
 
 
             <tr   key={task._id}>
