@@ -31,11 +31,11 @@ export const Header = () => {
 
   useEffect(() => {
 
-    if (loggined) {
-      getUser();
-    }
+
+    getUser();
+
   }
-    , [loggined]);
+    , []);
 
   const logout = async () => {
     try {

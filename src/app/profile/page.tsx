@@ -23,23 +23,22 @@ const Profile = () => {
       const res = await axios.get("/api/users/me");
       console.log(res.data);
       setUser(res.data);
-      setLoggined(true);
 
     } catch (err: any) {
       console.log(err.message);
     } finally {
-      setLoggined(false);
+
 
     }
 
   };
 
   useEffect(() => {
-    if (loggined) {
-      getUser();
-    }
+
+    getUser();
+
   }
-    , [loggined]);
+    , []);
 
   return user ? (
     <div className=" flex  justify-center">
