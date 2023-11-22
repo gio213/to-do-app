@@ -105,12 +105,50 @@ const page = () => {
   };
 
 
-  const handleCompletedClick = (id: string) => {
-    setId(id);
-    setCompleted(true);
-    toast.success('Task completed successfully');
-    console.log(id);
+  const completeTodo = async (task_id: string) => {
+    try {
+      setId(task_id);
+      const res = await axios.put("api/todos/completed", {
+        completed: true,
+        _id: task_id,
 
+      });
+      console.log(res.data);
+      setCompleted(true);
+
+      setTask(res.data.todo)
+      toast.success(res.data.message);
+
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setModalEdit(false);
+      setEdit("");
+
+    }
+  }
+
+
+  const uncompleteTodo = async (task_id: string) => {
+    try {
+      setId(task_id);
+      const res = await axios.put("api/todos/completed", {
+        completed: false,
+        _id: task_id,
+
+      });
+      console.log(res.data);
+      setCompleted(true);
+      setTask(res.data.todo)
+      toast.success(res.data.message);
+
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setModalEdit(false);
+      setEdit("");
+
+    }
   }
 
 
@@ -169,11 +207,11 @@ const page = () => {
                   <td>{task.title}</td>
                   <td>
                     {task.completed ? (
-                      <button onClick={() => handleCompletedClick(task._id)} className="btn btn-sm btn-success">
+                      <button onClick={() => uncompleteTodo(task._id)} className="btn btn-sm btn-success">
                         Completed
                       </button>
                     ) : (
-                      <button onClick={() => handleCompletedClick(task._id)} className="btn btn-sm btn-error">
+                      <button onClick={() => completeTodo(task._id)} className="btn btn-sm btn-error">
                         Not completed
                       </button>
                     )}

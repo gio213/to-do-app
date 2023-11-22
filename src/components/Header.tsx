@@ -82,12 +82,12 @@ export const Header = () => {
               <Link href={"/"}>Homepage</Link>
             </li>
             <li>
-              <Link href={"/profile"}>Profile</Link>
+              {loggined ? <Link href={"/profile"}>Profile</Link> : ""}
             </li>
             <li>
-              <Link onClick={logout} href={"/login"}>
+              {loggined ? <Link onClick={logout} href={"/login"}>
                 Logout
-              </Link>
+              </Link> : ""}
               {/* <p onClick={logout}>Logout</p> */}
             </li>
           </ul>
