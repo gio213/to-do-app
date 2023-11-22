@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   description: "To do list app is a simple app that allows you to create a list of tasks that you need to complete. All todos are stored in the cloud, so you can access them from anywhere.",
 
 
-  // url: "https://to-do-app-ivory-nu.vercel.app/",
 };
 
 export default function RootLayout({
@@ -25,15 +24,18 @@ export default function RootLayout({
     <AuthContextWrapper>
       <html lang="en">
         <head>
+
           <meta charSet="utf-8" />
           <meta name="description" content={metadata.description as string} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>{metadata.title as string}</title>
-          <link rel="icon" href="/favicon.ico" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-            rel="stylesheet"
-          />
+          <link rel="icon" href="/icons8-todo-list-100.png" />
+          <meta property='og:url' content='https://to-do-app-ivory-nu.vercel.app/' />
+          <meta name="image" property="og:image"
+            content="https://res.cloudinary.com/dimy1fj2c/image/upload/v1700665730/jviehpcc7gg6yajeyobp.png"></meta>
+          <meta name="author" content="Giorgi Patsia"></meta>
+
+
         </head>
         <body className={inter.className}>
           <Header />
