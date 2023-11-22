@@ -3,7 +3,6 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import Cookies from 'js-cookie';
 connect();
 
 export async function POST(request: NextRequest) {
@@ -42,7 +41,6 @@ export async function POST(request: NextRequest) {
     response.cookies.set("token", token, {
       httpOnly: true,
     });
-    Cookies.set("token", token, { expires: 1 });
     return response;
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
