@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const todoSchema = new mongoose.Schema({
+ _id: mongoose.Schema.Types.ObjectId,
   title: {
     type: String,
     required: [true, "Title is required"],
@@ -13,12 +14,10 @@ const todoSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
-  id:{
-    type: String,
-    required: [true, "Id is required..."],
 
-  }
+
 });
+
 
 const Todo = mongoose.models.todos || mongoose.model("todos", todoSchema);
 

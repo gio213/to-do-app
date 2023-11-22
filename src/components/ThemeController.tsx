@@ -1,47 +1,34 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
 
 
 
 export const ThemeController = () => {
-  const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'nord');
+  const [theme, setTheme] = useState("nord");
 
   const toggleTheme = () => {
-    const newTheme = theme === 'nord' ? 'night' : 'nord';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    if (theme === "nord") {
+      setTheme("night");
+
+    } else {
+      setTheme("nord");
+
+    }
   };
 
-  useEffect(() => {
-    const localTheme = localStorage.getItem('theme');
-    if (localTheme) {
-      setTheme(localTheme);
-    }
-
-
-
-  }, [theme]);
 
 
 
 
-  // useEffect(() => {
-  //   if(theme === 'nord'){
-  //     document.documentElement.classList.remove('nord');
-  //     document.documentElement.classList.add('night');
 
 
-  // }else{
-  //   document.documentElement.classList.add('nord');
-  //   document.documentElement.classList.remove('nord');
-  //   console.log('night');
-  // }
-  // }
-  // , [theme]);
+
+
 
   return (
     <label className="swap swap-rotate">
       <input type="checkbox" className="theme-controller" value={theme} onClick={toggleTheme} />
-          <svg
+      <svg
         className="swap-on fill-current w-5 h-5"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
