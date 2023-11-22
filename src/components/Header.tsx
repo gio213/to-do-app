@@ -11,20 +11,19 @@ import { Iuser } from "@/types/tasksType";
 export const Header = () => {
   const router = useRouter();
   const [user, setUser] = useState<object>({});
-  const [token, setToken] = useState(null);
 
-  const {isLogin: loggined, setIsLogin: setLoggined} = AuthContext();
+  const { isLogin: loggined, setIsLogin: setLoggined } = AuthContext();
 
   const getUser = async () => {
-    try{
-      const {data} = await axios.get("/api/users/me");
+    try {
+      const { data } = await axios.get("/api/users/me");
       console.log(data);
-      if(data){
+      if (data) {
         setUser(data);
         setLoggined(true);
       }
 
-    }catch(err:any){
+    } catch (err: any) {
       console.log(err.message);
     }
 
@@ -34,7 +33,7 @@ export const Header = () => {
 
     getUser();
   }
-  , []);
+    , []);
 
   const logout = async () => {
     try {
@@ -44,7 +43,7 @@ export const Header = () => {
       console.log(err.message);
       toast.error(err.message);
 
-    }finally{
+    } finally {
       router.push("/login");
       setLoggined(false);
       setUser({});
@@ -96,16 +95,16 @@ export const Header = () => {
       </div>
       {loggined ? (
         <>
-        <button onClick={logout} className="btn btn-ghost">Logout</button>
-        <div  className="   flex gap-1 navbar-end">
-        {loggined? <p>Hello { user && (user as Iuser).username }</p>:""}
-        <div className="avatar">
-          <div className="w-10 mask mask-hexagon">
-            <img src="https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg" />
+          <button onClick={logout} className="btn btn-ghost">Logout</button>
+          <div className="   flex gap-1 navbar-end">
+            {loggined ? <p>Hello {user && (user as Iuser).username}</p> : ""}
+            <div className="avatar">
+              <div className="w-10 mask mask-hexagon">
+                <img src="https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg" />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      </>
+        </>
       ) : (
         <div className=" flex gap-2 navbar-center">
           <Link href="/login">
@@ -116,7 +115,7 @@ export const Header = () => {
           </Link>
         </div>
       )}
-      <ThemeController/>
+      <ThemeController />
       <Toaster />
     </div>
   );
