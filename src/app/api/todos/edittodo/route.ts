@@ -14,12 +14,19 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         if (!title) {
             return NextResponse.json({ error: "Title is required" }, { status: 400 });
         }
+        if (!id) {
+            return NextResponse.json({ error: "Todo id is required" }, { status: 400 });
+        }
+
+
 
         const todo = await Todo.findOne({ _id: id, user: userId });
         if (!todo) {
             return NextResponse.json({ error: "Todo not found" }, { status: 404 });
         }
         todo.title = title;
+        todo.updated_at = Date.now();
+        todo.updated = true;
         await todo.save();
         return NextResponse.json({ message: "Todo updated successfully", todo }, { status: 200 });
 

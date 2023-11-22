@@ -34,6 +34,9 @@ const page = () => {
         setLoading(true);
         const res = await axios.post("api/todos/addtodo", {
           title: text,
+
+
+
         });
         console.log(res.data);
         toast.success('Task added successfully');
@@ -172,6 +175,34 @@ const page = () => {
     , [task]);
 
 
+  /// function which calculate the time between the creation of the task and the current time
+  const timeAgo = (date: string) => {
+    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+    let interval = seconds / 31536000;
+    if (interval > 1) {
+      return Math.floor(interval) + " years ago";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months ago";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days ago";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours ago";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes ago";
+    }
+    return Math.floor(seconds) + " seconds ago";
+  }
+
+
+
 
 
 
@@ -197,6 +228,9 @@ const page = () => {
           <thead>
             <tr>
               <th>Tasks</th>
+              <th>Created at </th>
+              <th>Updated at </th>
+              <th>Status</th>
               <th>Actions </th>
             </tr>
           </thead>
@@ -205,6 +239,8 @@ const page = () => {
               tasks.slice().reverse().map((task: any) => (
                 <tr key={task._id}>
                   <td>{task.title}</td>
+                  <td>{timeAgo(task.created_at)}</td>
+                  <td>{task.updated ? timeAgo(task.updated_at) : "Never updated"}</td>
                   <td>
                     {task.completed ? (
                       <button onClick={() => uncompleteTodo(task._id)} className="btn btn-sm btn-success">

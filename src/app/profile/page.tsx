@@ -1,7 +1,11 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+
 const Profile = () => {
+  const { isLogin: loggined, setIsLogin: setLoggined } = AuthContext();
+
   const [user, setUser] = useState<{ email: string; isVerifed: boolean; _id: string }>({
     email: "",
     isVerifed: false,
@@ -13,16 +17,29 @@ const Profile = () => {
 
 
 
+
   const getUser = async () => {
-    const res = await axios.get("/api/users/me");
-    console.log(res.data);
-    setUser(res.data);
+    try {
+      const res = await axios.get("/api/users/me");
+      console.log(res.data);
+      setUser(res.data);
+      setLoggined(true);
+
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoggined(false);
+
+    }
+
   };
 
   useEffect(() => {
-    getUser();
-    console.log(user);
-  }, []);
+    if (loggined) {
+      getUser();
+    }
+  }
+    , [loggined]);
 
   return user ? (
     <div className=" flex  justify-center">

@@ -16,12 +16,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
             _id: new mongoose.Types.ObjectId(),
             title,
             user: userId,
+
         });
         console.log(newTodo);
         if (!title) {
             return NextResponse.json({ error: "Title is required " }, { status: 400 });
         }
         const todo = await newTodo.save();
+        console.log(todo);
         return NextResponse.json({ message: "Todo added successfully", todo }, { status: 201 });
 
 

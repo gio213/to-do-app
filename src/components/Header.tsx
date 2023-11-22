@@ -31,9 +31,11 @@ export const Header = () => {
 
   useEffect(() => {
 
-    getUser();
+    if (loggined) {
+      getUser();
+    }
   }
-    , []);
+    , [loggined]);
 
   const logout = async () => {
     try {
@@ -44,9 +46,10 @@ export const Header = () => {
       toast.error(err.message);
 
     } finally {
-      router.push("/login");
+      router.push("/");
       setLoggined(false);
       setUser({});
+      router.refresh();
 
 
     }
@@ -85,7 +88,7 @@ export const Header = () => {
               {loggined ? <Link href={"/profile"}>Profile</Link> : ""}
             </li>
             <li>
-              {loggined ? <Link onClick={logout} href={"/login"}>
+              {loggined ? <Link href={"/"} onClick={logout} >
                 Logout
               </Link> : ""}
               {/* <p onClick={logout}>Logout</p> */}
