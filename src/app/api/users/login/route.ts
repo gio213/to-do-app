@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     // create token
     const token = await jwt.sign(
       tokenData,
-      "f3e515e571837374a757b333c214211a3292a260391613c38027452f2d342e1a071f488f12808b8c2906cbcab7f2f1e963bea4eed21166a1bb01c2fecf30f901",
+      process.env.TOKEN_SECRET as string,
       { expiresIn: "1d" }
     );
     const response = NextResponse.json({
@@ -40,6 +40,9 @@ export async function POST(request: NextRequest) {
     });
     response.cookies.set("token", token, {
       httpOnly: true,
+      path: "/",
+      sameSite: "lax",
+      secure: true,
     });
     return response;
   } catch (err: any) {

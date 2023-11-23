@@ -89,13 +89,14 @@ const SignUp = () => {
           </Link>
         </div>
 
-        <button className="btn btn-outline">
+        {/* <button className="btn btn-outline">
           <FcGoogle /> Login with Google{" "}
-        </button>
+        </button> */}
 
         <label
           onClick={() => {
             setIsOpen(false);
+            router.push("/");
           }}
           className="btn btn-sm btn-circle absolute right-2 top-2"
         >

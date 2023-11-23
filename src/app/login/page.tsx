@@ -8,6 +8,7 @@ import axios from "axios";
 import { Spinner } from "@/components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "@/context/AuthContext";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -19,7 +20,7 @@ const Login = () => {
     password: "",
   });
 
-  const {setIsLogin} = AuthContext();
+  const { setIsLogin } = AuthContext();
 
   const onLogin = async () => {
     try {
@@ -29,7 +30,6 @@ const Login = () => {
       toast.success(response.data.message);
       setIsLogin(true);
       router.push("/todos");
-      console.log("fdsfds")
     } catch (err: any) {
       console.log("login failed", err.response);
       toast.error(err?.data?.message);
@@ -45,6 +45,11 @@ const Login = () => {
       setButtonDisabled(true);
     }
   }, [user]);
+
+
+
+
+
   return (
     <div className={`   modal  ${isOpen ? "modal-open   " : ""}`}>
       <div className="     flex flex-col w-full items-center justify-center gap-5 modal-box relative">
@@ -69,10 +74,22 @@ const Login = () => {
             setUser({ ...user, password: e.target.value });
           }}
         />
-        <button onClick={onLogin} className="btn btn-info  w-1/2 ">
-          {" "}
-          {buttonDisabled ? "No Login" : "Log in"}
-        </button>
+        {buttonDisabled ? (
+          <button
+            className="btn btn-info w-full max-w-xs"
+            disabled
+          >
+            Login
+          </button>
+        ) : (
+          <button onClick={onLogin}
+            className="btn btn-info w-full max-w-xs"
+
+          >
+            Login
+          </button>
+        )}
+
 
         <div className="text-center">
           <p className="text-1xl text-black">Don't have an account?</p>
@@ -80,13 +97,15 @@ const Login = () => {
             Sign Up
           </Link>
         </div>
-        <button className="btn btn-outline">
+        <button
+          className="btn btn-outline">
           <FcGoogle /> Login with Google{" "}
         </button>
 
         <label
           onClick={() => {
             setIsOpen(false);
+            router.push("/");
           }}
           className="btn btn-sm btn-circle absolute right-2 top-2"
         >

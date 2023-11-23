@@ -21,6 +21,8 @@ export const Header = () => {
       if (data) {
         setUser(data);
         setLoggined(true);
+      } else {
+        setLoggined(false);
       }
 
     } catch (err: any) {
@@ -29,13 +31,24 @@ export const Header = () => {
 
   };
 
+
+
+
+
   useEffect(() => {
 
 
     getUser();
 
+
+
   }
     , []);
+
+
+
+
+
 
   const logout = async () => {
     try {

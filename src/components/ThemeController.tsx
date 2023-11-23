@@ -1,22 +1,25 @@
+"use client"
 import React, { useState, useEffect } from "react";
 
 
 
 
 export const ThemeController = () => {
-  const [theme, setTheme] = useState("nord");
+  const [theme, setTheme] = useState("light");
 
+
+  // nord theme and night theme
   const toggleTheme = () => {
-    if (theme === "nord") {
+    if (theme === "light") {
       setTheme("night");
-
+      localStorage.setItem("theme", "night");
     } else {
-      setTheme("nord");
-
+      setTheme("light");
+      localStorage.setItem("theme", "light");
     }
+
+
   };
-
-
 
 
 
