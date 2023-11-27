@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { Modal } from "@/components/Modal";
-
+import clsx from "clsx";
 
 
 const page = () => {
@@ -224,7 +224,7 @@ const page = () => {
 
       <div className=" h-screen   overflow-x-auto">
 
-        <table className="  table">
+        <table className="table ">
           {/* head */}
           <thead>
             <tr>
@@ -244,11 +244,14 @@ const page = () => {
                   <td>{task.updated ? timeAgo(task.updated_at) : "Never updated"}</td>
                   <td>
                     {task.completed ? (
-                      <button onClick={() => uncompleteTodo(task._id)} className="btn btn-sm btn-success">
+                      <button className={clsx("btn btn-sm btn-success")}
+                        onClick={() => uncompleteTodo(task._id)}
+                      >
                         Completed
                       </button>
                     ) : (
-                      <button onClick={() => completeTodo(task._id)} className="btn btn-sm btn-error">
+                      <button className={clsx("btn btn-sm btn-error")}
+                        onClick={() => completeTodo(task._id)}>
                         Not completed
                       </button>
                     )}

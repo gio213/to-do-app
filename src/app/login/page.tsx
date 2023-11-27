@@ -8,7 +8,6 @@ import axios from "axios";
 import { Spinner } from "@/components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "@/context/AuthContext";
-import { signIn } from "next-auth/react";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -27,8 +26,8 @@ const Login = () => {
       setLoading(true);
       const response = await axios.post("/api/users/login", user);
       console.log("success login", response.data);
-      toast.success(response.data.message);
       setIsLogin(true);
+      toast.success(response.data.message);
       router.push("/todos");
     } catch (err: any) {
       console.log("login failed", err.response);

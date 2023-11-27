@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
+import { cookies } from 'next/headers'
 
 export async function GET() {
   try {
     console.log("Logout route reached");
     const response = NextResponse.json({ message: "Logout", success: true });
-    response.cookies.set("token", "", { httpOnly: true, expires: new Date(0), path: "/" });
+    response.cookies.delete("token");
     console.log("Cookie deleted");
     return response;
   } catch (error: any) {

@@ -20,13 +20,15 @@ export const Header = () => {
       console.log(data);
       if (data) {
         setUser(data);
-        setLoggined(true);
-      } else {
-        setLoggined(false);
       }
+
 
     } catch (err: any) {
       console.log(err.message);
+    } finally {
+      if (user) {
+        setLoggined(true);
+      }
     }
 
   };
@@ -72,7 +74,7 @@ export const Header = () => {
 
   return (
     <div className="navbar  bg-base-100 shadow-xl  ">
-      <div className="navbar-start">
+      <div className=" flex flex-1 content-between">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <svg
@@ -104,7 +106,6 @@ export const Header = () => {
               {loggined ? <Link href={"/"} onClick={logout} >
                 Logout
               </Link> : ""}
-              {/* <p onClick={logout}>Logout</p> */}
             </li>
           </ul>
         </div>
@@ -113,7 +114,7 @@ export const Header = () => {
         <>
           <button onClick={logout} className="btn btn-ghost">Logout</button>
           <div className="   flex gap-1 navbar-end">
-            {loggined ? <p>Hello {user && (user as Iuser).username}</p> : ""}
+            {user ? <p>Hello {user && (user as Iuser).username}</p> : ""}
             <div className="avatar">
               <div className="w-10 mask mask-hexagon">
                 <img src="https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg" />
