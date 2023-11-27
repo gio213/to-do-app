@@ -20,15 +20,15 @@ export const Header = () => {
       console.log(data);
       if (data) {
         setUser(data);
+        setLoggined(true);
+      } else {
+        setUser({});
+        setLoggined(false);
       }
 
 
     } catch (err: any) {
       console.log(err.message);
-    } finally {
-      if (user) {
-        setLoggined(true);
-      }
     }
 
   };
@@ -56,19 +56,21 @@ export const Header = () => {
     try {
       const response = await axios.get("/api/users/logout");
       toast.success(response.data.message);
+      setLoggined(false);
+      setUser({});
     } catch (err: any) {
       console.log(err.message);
       toast.error(err.message);
 
     } finally {
       router.push("/");
-      setLoggined(false);
-      setUser({});
+
       router.refresh();
 
 
     }
   };
+
 
 
 

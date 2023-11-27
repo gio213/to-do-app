@@ -15,3 +15,12 @@ export interface Iuser {
     password: string;
     map: Map<string, any>;
 }
+export interface CookieSetOptions {
+    domain?: string;
+    path?: string;
+    expires?: Date;
+    maxAge?: number;
+    httpOnly?: boolean;
+    secure?: boolean;
+    sameSite?: "lax" | "strict" | "none";
+}
