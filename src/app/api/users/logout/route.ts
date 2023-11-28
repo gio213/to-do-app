@@ -10,7 +10,7 @@ export async function GET() {
     const domain = process.env.NODE_ENV === 'production' ? 'https://to-do-app-ivory-nu.vercel.app' : 'localhost'
     const cookieOptions: CookieSetOptions = {
       domain,
-      path: "/", // adjust the path if needed
+      path: "/",
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
