@@ -78,9 +78,14 @@ const SignUp = () => {
             setUser({ ...user, password: e.target.value });
           }}
         />
-        <button onClick={onSignUp} className="btn btn-info  w-1/2 ">
-          {buttonDisabled ? "No Sign up" : "Sign up"}
+        <button
+          disabled={buttonDisabled}
+          onClick={onSignUp}
+          className="btn btn-info w-full max-w-xs"
+        >
+          Sign up
         </button>
+
 
         <div className="text-center">
           <p className="text-1xl text-black">Go to </p>
@@ -89,9 +94,7 @@ const SignUp = () => {
           </Link>
         </div>
 
-        {/* <button className="btn btn-outline">
-          <FcGoogle /> Login with Google{" "}
-        </button> */}
+
 
         <label
           onClick={() => {

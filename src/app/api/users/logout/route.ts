@@ -7,7 +7,7 @@ export async function GET() {
   try {
     console.log("Logout route reached");
     const response = NextResponse.json({ message: "Logout", success: true });
-    const domain = process.env.NODE_ENV === 'production' ? 'https://to-do-app-ivory-nu.vercel.app' : 'localhost'
+    const domain = process.env.NODE_ENV === 'production' ? 'https://cute-mousse-93de58.netlify.app/' : 'localhost'
     const cookieOptions: CookieSetOptions = {
       domain,
       path: "/",
