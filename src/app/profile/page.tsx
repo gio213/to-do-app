@@ -15,8 +15,9 @@ import {
   Legend,
   BarElement,
 
+
 } from 'chart.js'
-import { Chart } from 'react-chartjs-2'
+import { Bar, Chart } from 'react-chartjs-2'
 
 ChartJS.register(
   CategoryScale,
@@ -24,9 +25,12 @@ ChartJS.register(
   PointElement,
   LineElement,
   BarElement,
+
+
   Title,
   Tooltip,
-  Legend
+  Legend,
+
 )
 const Profile = () => {
   const { isLogin: loggined, setIsLogin: setLoggined } = AuthContext();
@@ -138,8 +142,8 @@ const Profile = () => {
     <div className="  flex flex-col justify-center  items-center  gap-2 h-screen p-3">
       <div className="card  w-1/2 text-primary-content       "
       >
-        <Chart className="card-body"
-          type="bar"
+        <Bar className="card-body"
+
           data={{
             labels: data(tasks).daysOfWeek,
             datasets: [
