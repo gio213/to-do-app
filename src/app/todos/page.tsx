@@ -222,7 +222,7 @@ const page = () => {
 
       </div>
 
-      <div className=" h-screen   overflow-x-auto">
+      <div className=" h-screen overflow-x-auto    max-w-full">
 
         <table className="table ">
           {/* head */}

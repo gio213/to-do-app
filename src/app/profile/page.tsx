@@ -135,7 +135,7 @@ const Profile = () => {
 
   return user ? (
 
-    <div className="  flex flex-col justify-center  items-center  gap-2 h-screen">
+    <div className="  flex flex-col justify-center  items-center  gap-2 h-screen p-3">
       <div className="card  w-1/2 text-primary-content       "
       >
         <Chart className="card-body"
