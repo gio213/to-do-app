@@ -16,7 +16,7 @@ import {
   BarElement,
 
 } from 'chart.js'
-import { Bar, Chart } from 'react-chartjs-2'
+import { Chart } from 'react-chartjs-2'
 
 ChartJS.register(
   CategoryScale,
