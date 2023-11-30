@@ -3,47 +3,71 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { Itask } from "@/types/tasksType";
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from "next/navigation";
+
+
 
 import {
-  Chart as ChartJS,
+  Chart,
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  BarElement,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import { set } from "mongoose";
 
-
-} from 'chart.js'
-import { Bar, Chart } from 'react-chartjs-2'
-
-ChartJS.register(
+Chart.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
   BarElement,
-
-
   Title,
   Tooltip,
-  Legend,
+  Legend
+);
 
-)
 const Profile = () => {
   const { isLogin: loggined, setIsLogin: setLoggined } = AuthContext();
-  const [user, setUser] = useState<{ email: string; isVerifed: boolean; _id: string }>({
+  const [user, setUser] = useState<{ email: string; isVerifed: boolean; _id: string; verifayToken: string }>({
     email: "",
     isVerifed: false,
     _id: "",
+    verifayToken: ""
   });
   const [tasks, setTasks] = useState<Itask[]>([
 
   ]);
+  const [isVerifed, setIsVerifed] = useState<boolean>(false);
+  const router = useRouter();
+  const verify = async () => {
+    try {
+      await axios.post("api/users/verify", {
+        token: user.verifayToken
+      })
+      toast.success("Your account has been verified")
+      setIsVerifed(true)
+    } catch (err: any) {
+      console.log(err)
+      toast.error("Your account could not be verified")
+    } finally {
+      router.refresh();
+    }
+  }
 
 
+
+
+  useEffect(() => {
+    if (isVerifed) {
+      getUser();
+    }
+  }
+    , [isVerifed]);
 
 
   const data = (tasks: any) => {
@@ -78,9 +102,7 @@ const Profile = () => {
 
 
 
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks])
+
 
 
 
@@ -92,7 +114,7 @@ const Profile = () => {
   const getTodos = async () => {
     try {
       const res = await axios.get("api/todos/gettodos");
-      console.log(res.data);
+
       setTasks(res.data.todos);
 
     } catch (err: any) {
@@ -112,7 +134,7 @@ const Profile = () => {
   const getUser = async () => {
     try {
       const res = await axios.get("/api/users/me");
-      console.log(res.data);
+
       setUser(res.data);
 
     } catch (err: any) {
@@ -131,11 +153,14 @@ const Profile = () => {
   }
     , []);
 
+  const verifyUser = async () => {
+    try {
 
-  useEffect(() => {
-    console.log(data);
+    } catch (err: any) {
+      console.log(err.message)
+    }
   }
-    , [data]);
+
 
   return user ? (
 
@@ -154,11 +179,15 @@ const Profile = () => {
                 borderColor: 'rgba(255, 99, 132, 0.2)',
                 borderWidth: 1,
 
+
               },
             ],
           }}
           options={{
             scales: {
+              x: {
+                beginAtZero: true,
+              },
               y: {
                 beginAtZero: true,
 
@@ -175,7 +204,9 @@ const Profile = () => {
         <div className=" w-full card-body">
           <h2 className="card-title">User info</h2>
           <p>Email: {user.email}</p>
-          <p>Verifed: {user.isVerifed ? "Verified" : "Not verifed"}</p>
+          <p>Verifed: {user.isVerifed ? "Verified" : <button onClick={() => {
+            user.verifayToken ? verify() : null
+          }} className="btn btn-active btn-ghost"  > Verify</button>}</p>
           <p>User ID: {user._id}</p>
 
 

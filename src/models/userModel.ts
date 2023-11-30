@@ -22,6 +22,7 @@ const userSchema = new moongose.Schema({
   },
   forgotPasswordToken: String,
   forgotPasswordTokenExpire: Date,
+  verifayToken: String,
   verifayTokenExpire: String,
 });
 const User = moongose.models.users || moongose.model("users", userSchema);

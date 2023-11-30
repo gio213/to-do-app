@@ -120,7 +120,16 @@ const page = () => {
       setCompleted(true);
 
       setTask(res.data.todo)
-      toast.success(res.data.message);
+      toast('Task completed successfully!',
+        {
+          icon: '👏',
+          style: {
+            borderRadius: '10px',
+            background: '#ffffff',
+            color: '#000000',
+          },
+        }
+      );
 
     } catch (err: any) {
       console.log(err);
@@ -143,7 +152,16 @@ const page = () => {
       console.log(res.data);
       setCompleted(true);
       setTask(res.data.todo)
-      toast.success(res.data.message);
+      toast('Task uncompleted !',
+        {
+          icon: '🙁p',
+          style: {
+            borderRadius: '10px',
+            background: '#ffffff',
+            color: '#000000',
+          },
+        }
+      );
 
     } catch (err: any) {
       console.log(err);

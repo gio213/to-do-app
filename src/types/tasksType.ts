@@ -11,11 +11,13 @@ export interface Itask {
 
 
 export interface Iuser {
-    id: string;
+    _id: string;
     username: string;
     email: string;
     password: string;
     map: Map<string, any>;
+    isVerifed: boolean;
+
 }
 export interface CookieSetOptions {
     domain?: string;
