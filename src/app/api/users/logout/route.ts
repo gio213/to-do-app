@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
-import { cookies } from 'next/headers'
 import { CookieSetOptions } from "@/types/tasksType";
-
 
 export async function GET() {
   try {
     console.log("Logout route reached");
     const response = NextResponse.json({ message: "Logout", success: true });
-    const domain = process.env.NODE_ENV === 'production' ? 'https://cute-mousse-93de58.netlify.app/' : 'localhost'
+    const domain =
+      process.env.NODE_ENV === "production"
+        ? "https://cute-mousse-93de58.netlify.app/"
+        : "localhost";
     const cookieOptions: CookieSetOptions = {
       domain,
       path: "/",
@@ -17,9 +18,10 @@ export async function GET() {
     };
 
     // Delete the token cookie
-    response.cookies.set("token", "", { ...cookieOptions, maxAge: 0 });
-
-
+    response.headers.append(
+      "Set-Cookie",
+      `token=; Max-Age=0; Path=/; Domain=${domain}; Secure; HttpOnly; SameSite=Strict`
+    );
 
     return response;
   } catch (error: any) {
