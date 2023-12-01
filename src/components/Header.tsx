@@ -54,7 +54,7 @@ export const Header = () => {
 
 
 
-  const logout = async () => {
+  const logout = () => {
     // try {
     //   const response = await axios.get("/api/users/logout");
     //   toast.success(response.data.message);
