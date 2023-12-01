@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 import { Iuser } from "@/types/tasksType";
+import { deleteCookie } from "cookies-next"
 
 export const Header = () => {
   const router = useRouter();
@@ -31,6 +32,7 @@ export const Header = () => {
       console.log(err.message);
     }
 
+
   };
 
 
@@ -53,22 +55,24 @@ export const Header = () => {
 
 
   const logout = async () => {
-    try {
-      const response = await axios.get("/api/users/logout");
-      toast.success(response.data.message);
-      setLoggined(false);
-      setUser({});
-    } catch (err: any) {
-      console.log(err.message);
-      toast.error(err.message);
+    // try {
+    //   const response = await axios.get("/api/users/logout");
+    //   toast.success(response.data.message);
+    //   setLoggined(false);
+    //   setUser({});
+    // } catch (err: any) {
+    //   console.log(err.message);
+    //   toast.error(err.message);
 
-    } finally {
-      router.push("/");
+    // } finally {
+    //   router.push("/");
 
-      router.refresh();
+    //   router.refresh();
 
 
-    }
+    // }
+    deleteCookie("token")
+
   };
 
 

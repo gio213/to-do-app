@@ -15,6 +15,7 @@
     "chart.js": "^4.4.0",
     "client-oauth2": "^4.3.3",
     "clsx": "^2.0.0",
+    "cookies-next": "^4.1.0",
     "dotenv": "^16.3.1",
     "google-auth-library": "^9.2.0",
     "jsonwebtoken": "^9.0.2",
