@@ -38,12 +38,7 @@ export async function POST(request: NextRequest) {
       message: "Login successful",
       success: true,
     });
-    response.cookies.set("token", token, {
-      httpOnly: true,
-      path: "/",
-      sameSite: "lax",
-      secure: true,
-    });
+    response.cookies.set("token", token);
     return response;
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
